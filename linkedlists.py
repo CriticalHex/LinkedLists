@@ -15,10 +15,21 @@ class List:
                 return self.next.find_index(depth - 1)
             raise IndexError
 
+        def find_next_value(self, val):
+            if self.next:
+                if self.next.val == val:
+                    return self
+                return self.next.find_next_value(val)
+
         def find_end(self):
             if self.next:
                 return self.next.find_end()
             return self
+
+        def print_list(self):
+            print(self.val)
+            if self.next:
+                self.next.print_list()
 
     def __init__(self, val=None) -> None:
         self.root: List.Node = List.Node(val)
@@ -52,10 +63,23 @@ class List:
         self.len += 1
 
     def remove(self, val):
-        pass
+        if self.root.val == val:
+            self.root = self.root.next
+            self.len -= 1
+            return
+        (x := self.root.find_next_value(val))
+        if x:
+            next = x.next.next
+            if next:
+                x.next = next
+            else:
+                x.next = None
+            self.len -= 1
+            return
+        raise IndexError
 
     def print_list(self):
-        pass
+        self.root.print_list()
 
     def print_index(self, index):
         print(self.get_index(index).val)
