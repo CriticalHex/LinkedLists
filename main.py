@@ -2,13 +2,8 @@ from linkedlists import List
 
 
 l = List(0)
-l.append(1)
-l.append(2)
-l.append(3)
-l.append(4)
-l.append(5)
+for i in range(1, 6):
+    l.append(i)
 
-l.print_list()
-print()
-l.reverse()
-l.print_list()
+l.fullswap()
+l.print_list(backwards=True)

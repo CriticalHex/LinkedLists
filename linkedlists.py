@@ -141,3 +141,24 @@ class List:
         for i in range(self.len - 2, -1, -1):
             new_list.append(old_node.find_index(i).val)
         self.root = new_list.root
+
+    def fullswap(self):
+        for i in range(0, self.len, 2):
+            if i + 1 < self.len:
+                self.swap_nodes(self.get_index(i), self.get_index(i + 1))
+
+    def swap_nodes(self, node1: Node, node2: Node):
+        p1 = node1.prev
+        n2 = node2.next
+
+        
+        node2.prev = p1
+        node2.next = node1
+        node1.prev = node2
+        node1.next = n2
+        if p1:
+            p1.next = node2
+        else:
+            self.root = node2
+        if n2:
+            n2.prev = node1
